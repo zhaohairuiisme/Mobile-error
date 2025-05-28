@@ -1,52 +1,97 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <link rel="icon" href="ai.webp" type="image/x-icon">
+  <link rel="icon" href="https://github.githubassets.com/favicons/favicon-dark.png" type="image/x-icon">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>提示 - zhaohairuiisme</title>
+  <title>🌐 建议桌面端访问 | zhaohairuiisme</title>
   <!-- 引入Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入Font Awesome -->
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- 引入Google字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style type="text/tailwindcss">
     @layer utilities {
-      .error-container {
-        @apply bg-white rounded-lg shadow-2xl max-w-md p-10 text-center relative;
-        @apply border border-primary/10 hover:shadow-xl transition-all duration-300; /* 新增悬停动效 */
+      .gradient-card {
+        background: linear-gradient(135deg, #165DFF1A, #722ED11A);
+        box-shadow: 0 12px 28px rgba(22, 93, 255, 0.15), 0 4px 8px rgba(0, 0, 0, 0.06);
       }
-      .error-icon {
-        @apply text-primary text-5xl mb-6 block;
-        @apply animate-bounce; /* 新增图标跳动动画 */
+      .text-serif {
+        font-family: 'Playfair Display', serif;
       }
-      .error-title {
-        @apply text-[clamp(2rem,6vw,2.8rem)] font-bold mb-4 text-shadow;
-        @apply bg-gradient-to-r from-primary to-secondary text-gradient; /* 沿用原网站渐变文字 */
+      .float-animation {
+        animation: float 2.5s ease-in-out infinite;
       }
-      .error-text {
-        @apply text-lg text-gray-600 mb-8 max-w-xl mx-auto;
-        @apply leading-relaxed; /* 优化行高提升可读性 */
+      @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+        100% { transform: translateY(0); }
       }
     }
   </style>
 </head>
-<body class="font-inter bg-light flex items-center justify-center min-h-screen">
-  <div class="error-container">
-    <span class="error-icon">
-      <i class="fa fa-desktop"></i> <!-- 更换为电脑图标增强场景感 -->
-    </span>
-    <h1 class="error-title">
-      仅支持桌面端访问
-    </h1>
-    <p class="error-text">
-      本网站专注于提供沉浸式大屏浏览体验，<br>
-      建议使用电脑或平板设备访问，以解锁完整功能。<br>
-      <small class="text-sm text-gray-500">我们将于2025年Q4启动移动端适配计划</small>
-    </p>
-    <!-- 移除返回按钮，强化用户使用桌面设备的引导 -->
+<body class="font-inter bg-gray-50 text-dark antialiased">
+  <header class="fixed w-full top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-4 py-3 flex justify-center items-center">
+      <a href="https://github.com/zhaohairuiisme" class="flex items-center space-x-2 text-primary hover:opacity-80">
+        <span class="text-2xl float-animation">
+          <i class="fa fa-github"></i>
+        </span>
+        <span class="font-bold text-xl md:text-2xl">zhaohairuiisme</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="min-h-screen pt-20 pb-12 flex items-center justify-center bg-cover bg-no-repeat bg-center" style="background-image: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('https://picsum.photos/1920/1080?grayscale&blur=2');">
+    <div class="container mx-auto px-4 text-center">
+      <div class="gradient-card rounded-3xl p-12 max-w-2xl transform transition-all hover:scale-105">
+        <span class="text-4xl text-primary mb-4 block">
+          <i class="fa fa-desktop mr-2"></i>
+          <span class="text-serif">桌面端优先</span>
+        </span>
+        <h1 class="text-3xl font-bold text-secondary mb-6">
+          欢迎来到技术探索空间
+        </h1>
+        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+          本项目精心设计的交互与布局更适合在桌面端呈现，
+          <br>建议使用 <strong>1366px以上分辨率屏幕</strong> 访问，感受更沉浸的技术体验。
+          <br><br>
+          <span class="text-sm text-primary">✨ 小提示：</span> 移动端适配正在路上，感谢您的耐心等待！
+        </p>
+        
+        <div class="mt-10">
+          <a href="https://github.com/zhaohairuiisme" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg transition-all inline-flex items-center space-x-2">
+            <i class="fa fa-github float-animation"></i>
+            <span class="font-medium">访问我的GitHub</span>
+          </a>
+        </div>
+
+        <div class="mt-8 text-sm text-gray-500">
+          <p>如需帮助或反馈，可在 <a href="https://github.com/zhaohairuiisme/your-repo/issues" class="text-primary hover:underline">项目仓库</a> 提交Issue</p>
+          <p>© 2025 zhaohairuiisme. 由 <span class="text-serif">代码与热爱</span> 构建</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 装饰元素 -->
+  <div class="fixed bottom-0 right-0 mt-12 mr-12 opacity-20">
+    <img src="https://picsum.photos/200/200?random&grayscale" alt="Code Illustration" class="h-24 float-animation">
   </div>
+
+  <script>
+    // 卡片悬停动画增强
+    const cards = document.querySelectorAll('.gradient-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.boxShadow = '0 18px 38px rgba(22, 93, 255, 0.25)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.boxShadow = '0 12px 28px rgba(22, 93, 255, 0.15)';
+      });
+    });
+  </script>
 </body>
 </html>
