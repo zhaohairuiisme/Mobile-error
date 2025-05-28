@@ -1,96 +1,192 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <link rel="icon" href="https://github.githubassets.com/favicons/favicon-dark.png" type="image/x-icon">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌐 建议桌面端访问 | zhaohairuiisme</title>
-  <!-- 引入Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入Font Awesome -->
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <!-- 引入Google字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>推荐桌面端访问 - zhaohairuiisme</title>
+  <style>
+    /* 加载动画 */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      transition: opacity 0.3s ease;
+    }
+    .loading-icon {
+      font-size: 48px;
+      color: #165DFF;
+      animation: spin 1.5s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .gradient-card {
-        background: linear-gradient(135deg, #165DFF1A, #722ED11A);
-        box-shadow: 0 12px 28px rgba(22, 93, 255, 0.15), 0 4px 8px rgba(0, 0, 0, 0.06);
-      }
-      .text-serif {
-        font-family: 'Playfair Display', serif;
-      }
-      .float-animation {
-        animation: float 2.5s ease-in-out infinite;
-      }
-      @keyframes float {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-12px); }
-        100% { transform: translateY(0); }
-      }
+    /* 主体样式 */
+    * {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .loaded body {
+      opacity: 1;
+    }
+    .container {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 12px 24px rgba(160, 174, 192, 0.2);
+      padding: 48px 32px;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+    }
+    .logo {
+      color: #165DFF;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .logo-icon {
+      font-size: 36px;
+      color: #722ED1;
+    }
+    .hero-icon {
+      font-size: 80px;
+      color: #FF7D00;
+      margin: 24px 0;
+      opacity: 0.9;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 0.9; transform: translateY(0); }
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #1D2129;
+      margin-bottom: 12px;
+    }
+    .device-type {
+      font-size: 16px;
+      color: #6B7280;
+      margin-bottom: 8px;
+    }
+    .desc {
+      font-size: 18px;
+      color: #6B7280;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: transform 0.2s ease;
+      outline: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #165DFF 0%, #722ED1 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(22, 93, 255, 0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: #F2F3F5;
+      color: #1D2129;
+      margin-left: 16px;
+    }
+    .accessibility-note {
+      font-size: 12px;
+      color: #9CA3AF;
+      margin-top: 24px;
     }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="font-inter bg-gray-50 text-dark antialiased">
-  <header class="fixed w-full top-0 z-50 bg-white shadow-md">
-    <div class="container mx-auto px-4 py-3 flex justify-center items-center">
-      <a href="https://github.com/zhaohairuiisme" class="flex items-center space-x-2 text-primary hover:opacity-80">
-        <span class="text-2xl float-animation">
-          <i class="fa fa-github"></i>
-        </span>
-        <span class="font-bold text-xl md:text-2xl">zhaohairuiisme</span>
-      </a>
+<body>
+  <!-- 加载蒙层 -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-icon"><i class="fa fa-spinner"></i></div>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <span class="logo-icon"><i class="fa fa-bolt"></i></span>
+      zhaohairuiisme
     </div>
-  </header>
-
-  <main class="min-h-screen pt-20 pb-12 flex items-center justify-center bg-cover bg-no-repeat bg-center" style="background-image: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('https://picsum.photos/1920/1080?grayscale&blur=2');">
-    <div class="container mx-auto px-4 text-center">
-      <div class="gradient-card rounded-3xl p-12 max-w-2xl transform transition-all hover:scale-105">
-        <span class="text-4xl text-primary mb-4 block">
-          <i class="fa fa-desktop mr-2"></i>
-          <span class="text-serif">桌面端优先</span>
-        </span>
-        <h1 class="text-3xl font-bold text-secondary mb-6">
-          欢迎来到技术探索空间
-        </h1>
-        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-          本项目精心设计的交互与布局更适合在桌面端呈现，
-          <br>建议使用 <strong>1366px以上分辨率屏幕</strong> 访问，感受更沉浸的技术体验。
-          <br><br>
-          <span class="text-sm text-primary">✨ 小提示：</span> 移动端适配正在路上，感谢您的耐心等待！
-        </p>
-        
-        <div class="mt-10">
-          <a href="https://github.com/zhaohairuiisme" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg transition-all inline-flex items-center space-x-2">
-            <i class="fa fa-github float-animation"></i>
-            <span class="font-medium">访问我的GitHub</span>
-          </a>
-        </div>
-
-        <div class="mt-8 text-sm text-gray-500">
-          <p>如需帮助或反馈，可在 <a href="https://github.com/zhaohairuiisme/your-repo/issues" class="text-primary hover:underline">项目仓库</a> 提交Issue</p>
-          <p>© 2025 zhaohairuiisme. 由 <span class="text-serif">代码与热爱</span> 构建</p>
-        </div>
-      </div>
+    <i class="fa fa-desktop hero-icon"></i>
+    
+    <!-- 设备类型识别 -->
+    <span class="device-type">检测到您使用的设备：<span id="deviceType">移动端</span></span>
+    
+    <h2 class="title">建议在桌面端访问</h2>
+    <p class="desc">
+      此网站专为大屏优化，<br>
+      电脑端可体验更流畅的交互和完整内容。
+    </p>
+    
+    <div>
+      <a href="/" class="btn btn-primary" id="mainBtn">返回首页</a>
+      <a href="#about" class="btn btn-secondary">了解更多</a>
     </div>
-  </main>
-
-  <!-- 装饰元素 -->
-  <div class="fixed bottom-0 right-0 mt-12 mr-12 opacity-20">
-    <img src="https://picsum.photos/200/200?random&grayscale" alt="Code Illustration" class="h-24 float-animation">
+    
+    <!-- 无障碍提示 -->
+    <div class="accessibility-note">
+      如需协助，请联系：<a href="mailto:support@zhaohairuiisme.com">support@zhaohairuiisme.com</a>
+    </div>
   </div>
 
   <script>
-    // 卡片悬停动画增强
-    const cards = document.querySelectorAll('.gradient-card');
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.boxShadow = '0 18px 38px rgba(22, 93, 255, 0.25)';
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.boxShadow = '0 12px 28px rgba(22, 93, 255, 0.15)';
-      });
+    // 加载动画控制
+    window.addEventListener('load', () => {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.style.opacity = '0';
+      setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+        document.body.classList.add('loaded');
+      }, 300);
+    });
+
+    // 设备类型检测
+    const deviceTypeElement = document.getElementById('deviceType');
+    deviceTypeElement.textContent = /Mobile|Android|iPhone/i.test(navigator.userAgent) ? '移动端' : '桌面端';
+
+    // 键盘导航优化
+    const mainBtn = document.getElementById('mainBtn');
+    mainBtn.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        mainBtn.click();
+      }
     });
   </script>
 </body>
