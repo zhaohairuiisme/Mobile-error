@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>温馨提示 - zhaohairuiisme.github.io</title>
+    <title>提示 - zhaohairuiisme.github.io</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,6 @@
             font-family: 'Segoe UI', sans-serif;
             list-style: none;
         }
-
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* 淡蓝渐变背景 */
@@ -21,7 +20,6 @@
             align-items: center;
             overflow: hidden;
         }
-
         .container {
             text-align: center;
             background: white;
@@ -29,32 +27,27 @@
             padding: 40px 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* 立体阴影 */
         }
-
         .header {
             margin-bottom: 30px;
         }
-
         .icon {
             font-size: 64px;
             color: #2196F3; /* 品牌蓝 */
             margin-bottom: 15px;
             animation: bounce 1.5s infinite; /* 跳动动画 */
         }
-
         .title {
             font-size: 28px;
             color: #333;
             font-weight: 500;
             margin-bottom: 10px;
         }
-
         .desc {
             font-size: 16px;
             color: #666;
             line-height: 1.5;
             margin-bottom: 30px;
         }
-
         .btn {
             display: inline-block;
             padding: 12px 35px;
@@ -65,18 +58,15 @@
             font-weight: 600;
             transition: transform 0.3s;
         }
-
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
         }
-
         /* 动画定义 */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-
         /* 适配小屏幕 */
         @media (max-width: 480px) {
             .container {
@@ -89,17 +79,28 @@
     </style>
 </head>
 <body>
+    <script>
+        if (/Mobile|Android|iPhone/i.test(navigator.userAgent)) {
+            // 默认不跳转，等待用户点击按钮
+        } else {
+            window.location.href = "https://zhaohairuiisme.github.io/home";
+        }
+
+        function compulsion() {
+            // 跳转到指定页面
+            window.location.href = "https://zhaohairuiisme.github.io/home";
+        }
+    </script>
     <div class="container">
         <div class="header">
-            
             <h2 class="title">抱歉，暂不支持手机访问</h2>
         </div>
         <p class="desc">
             您好！<br>
             <strong>zhaohairuiisme.github.io</strong> 网站专为桌面端设计，<br>
-            建议使用电脑浏览器（如 Chrome / Edge）获得最佳体验～
-        </div>
-        
+            建议使用电脑浏览器（如 Chrome / Edge）获得最佳体验。
+        </p>
+        <button class="btn" onclick="compulsion()">强制使用手机端访问网站</button>
     </div>
 </body>
 </html>
